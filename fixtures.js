@@ -15,6 +15,7 @@ const SECURITY_CHECKS = [
     {name: "ScreenLockCheck", id: "org.aerogear.mobile.security.checks.ScreenLockCheck"},
 
 ];
+const FRAMEWORKS = ["native", "native", "cordova"];
 
 const INIT_EVENT_STREAM_FREQUENCY = 50;   // e.g. every 5 seconds means 60*60*24/5 = 17K app inits per day
 const SECURITY_EVENT_STREAM_FREQUENCY = 500;   // e.g. every 5 seconds means 60*60*24/5 = 17K app inits per day
@@ -31,12 +32,13 @@ function initEventStream(listener) {
             const platform = PLATFORMS[Math.floor(random() * PLATFORMS.length)];
             listener({
                     clientId: CLIENT_IDS[platform][Math.floor(random() * CLIENT_IDS[platform].length)],
-                    eventType: "init",
+                    type: "init",
                     data: {
                         app: {
                             appId: APP_IDS[Math.floor(random() * APP_IDS.length)],
                             sdkVersion: SDK_VERSIONS[Math.floor(random() * SDK_VERSIONS.length)],
-                            appVersion: APP_VERSIONS[platform][Math.floor(random() * APP_VERSIONS[platform].length)]
+                            appVersion: APP_VERSIONS[platform][Math.floor(random() * APP_VERSIONS[platform].length)],
+                            framework: FRAMEWORKS[Math.floor(random() * FRAMEWORKS.length)],
                         },
                         device: {
                             platform: platform,
@@ -67,12 +69,13 @@ function securityEventStream(listener) {
             }
             listener({
                     clientId: CLIENT_IDS[platform][Math.floor(random() * CLIENT_IDS[platform].length)],
-                    eventType: "security",
+                    type: "security",
                     data: {
                         app: {
                             appId: APP_IDS[Math.floor(random() * APP_IDS.length)],
                             sdkVersion: SDK_VERSIONS[Math.floor(random() * SDK_VERSIONS.length)],
-                            appVersion: APP_VERSIONS[platform][Math.floor(random() * APP_VERSIONS[platform].length)]
+                            appVersion: APP_VERSIONS[platform][Math.floor(random() * APP_VERSIONS[platform].length)],
+                            framework: FRAMEWORKS[Math.floor(random() * FRAMEWORKS.length)],
                         },
                         device: {
                             platform: platform,
